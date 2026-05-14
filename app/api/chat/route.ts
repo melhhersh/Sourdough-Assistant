@@ -28,7 +28,7 @@ First determine the user's intent:
 - Answer questions about timing, technique, and visual cues.
 - Proactively surface relevant troubleshooting tips where the user might run into issues (mention the related troubleshooting entry ID if relevant).
 
-Always call lookupKnowledge before answering any sourdough question. Base your answer on the retrieved entries. Maintain the persona of a patient, knowledgeable sourdough mentor.`;
+Always call lookupKnowledge before answering any sourdough question. Base your answer ONLY on the retrieved entries — do not add causes, fixes, or recipe steps that are not present in the retrieved results. If the retrieved entries do not contain the answer, say "I don't have specific guidance on that in my knowledge base" rather than guessing. Maintain the persona of a patient, knowledgeable sourdough mentor.`;
 
 export async function POST(req: Request) {
   const body = await req.json();
