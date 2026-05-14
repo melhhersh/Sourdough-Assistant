@@ -1,0 +1,343 @@
+[
+  {
+    "id": "ts-easy-001",
+    "mode": "troubleshooting",
+    "difficulty": "easy",
+    "user_messages": [
+      "My sourdough starter smells like nail polish remover. What's wrong?"
+    ],
+    "expected_root_cause_id": "starter-acetone-nail-polish-smell",
+    "expected_symptoms": ["acetone smell", "nail polish remover odor"],
+    "notes": "Clear single symptom; starter-acetone entry should rank #1."
+  },
+  {
+    "id": "ts-easy-002",
+    "mode": "troubleshooting",
+    "difficulty": "easy",
+    "user_messages": [
+      "My bread crumb is really gummy and wet inside even though the outside looks done."
+    ],
+    "expected_root_cause_id": "crumb-gummy",
+    "expected_symptoms": ["gummy crumb", "wet interior"],
+    "notes": "Gummy crumb is a classic clear-cut symptom."
+  },
+  {
+    "id": "ts-easy-003",
+    "mode": "troubleshooting",
+    "difficulty": "easy",
+    "user_messages": [
+      "My starter has a layer of grey liquid on top. Is that normal?"
+    ],
+    "expected_root_cause_id": "starter-hooch-liquid-layer",
+    "expected_symptoms": ["liquid layer on starter", "grey liquid on top"],
+    "notes": "Hooch is an easy recognizable symptom."
+  },
+  {
+    "id": "ts-easy-004",
+    "mode": "troubleshooting",
+    "difficulty": "easy",
+    "user_messages": [
+      "My loaf spread out flat like a pancake instead of rising up. What happened?"
+    ],
+    "expected_root_cause_id": "loaf-spreads-flat-pancake",
+    "expected_symptoms": ["flat loaf", "loaf spread sideways"],
+    "notes": "Direct flat-pancake symptom matches entry ID."
+  },
+  {
+    "id": "ts-easy-005",
+    "mode": "troubleshooting",
+    "difficulty": "easy",
+    "user_messages": [
+      "My crust is coming out really pale and barely colored. I baked it for the full time."
+    ],
+    "expected_root_cause_id": "crust-pale-no-color",
+    "expected_symptoms": ["pale crust", "no color on crust"],
+    "notes": "Pale crust symptom is unambiguous."
+  },
+  {
+    "id": "ts-easy-006",
+    "mode": "troubleshooting",
+    "difficulty": "easy",
+    "user_messages": [
+      "My sourdough dough is extremely sticky and impossible to shape. It just spreads everywhere."
+    ],
+    "expected_root_cause_id": "dough-too-sticky-slack",
+    "expected_symptoms": ["sticky dough", "dough impossible to shape"],
+    "notes": "Sticky/slack dough is a clear single symptom."
+  },
+  {
+    "id": "ts-easy-007",
+    "mode": "troubleshooting",
+    "difficulty": "easy",
+    "user_messages": [
+      "My starter isn't doubling at all. It shows some bubbles after feeding but barely rises."
+    ],
+    "expected_root_cause_id": "starter-sluggish-not-doubling",
+    "expected_symptoms": ["starter not doubling", "sluggish starter"],
+    "notes": "Sluggish starter is a clear starter problem."
+  },
+  {
+    "id": "ts-medium-001",
+    "mode": "troubleshooting",
+    "difficulty": "medium",
+    "user_messages": [
+      "My bread didn't rise much in the oven and the crumb is really dense and tight.",
+      "I used my starter but I'm not sure if it was at peak. It had bubbles but hadn't doubled."
+    ],
+    "expected_root_cause_id": "bulk-underproofed",
+    "expected_symptoms": ["dense crumb", "no oven spring", "starter not at peak"],
+    "notes": "Dense crumb + no rise overlap between bulk-underproofed and crumb-dense-tight. Starter state info disambiguates."
+  },
+  {
+    "id": "ts-medium-002",
+    "mode": "troubleshooting",
+    "difficulty": "medium",
+    "user_messages": [
+      "My loaf didn't get an ear and there was a big blowout on the side instead.",
+      "I scored it about 30 degrees to the surface."
+    ],
+    "expected_root_cause_id": "no-ear-blowout-scoring",
+    "expected_symptoms": ["no ear", "side blowout", "30 degree score angle"],
+    "notes": "Scoring angle clarification needed for diagnosis."
+  },
+  {
+    "id": "ts-medium-003",
+    "mode": "troubleshooting",
+    "difficulty": "medium",
+    "user_messages": [
+      "My bread has a dense crumb even though it proofed overnight in the fridge.",
+      "The dough felt kind of slack going in. I did an 80% hydration recipe."
+    ],
+    "expected_root_cause_id": "crumb-dense-tight",
+    "expected_symptoms": ["dense crumb after cold retard", "slack dough", "high hydration"],
+    "notes": "High hydration + slack dough suggests gluten issue, not just underproofing."
+  },
+  {
+    "id": "ts-medium-004",
+    "mode": "troubleshooting",
+    "difficulty": "medium",
+    "user_messages": [
+      "My sourdough crust is burning on the bottom before the inside is cooked.",
+      "I'm baking at 500F on a baking stone."
+    ],
+    "expected_root_cause_id": "crust-burning-crumb-undercooked",
+    "expected_symptoms": ["burning bottom crust", "undercooked interior", "baking stone at 500F"],
+    "notes": "Baking stone + high temp context is key for diagnosis."
+  },
+  {
+    "id": "ts-medium-005",
+    "mode": "troubleshooting",
+    "difficulty": "medium",
+    "user_messages": [
+      "My dough keeps tearing when I try to shape it. It's not sticky, just won't stretch.",
+      "I did the stretch and folds but the dough still seems really tight."
+    ],
+    "expected_root_cause_id": "dough-tearing-during-shaping",
+    "expected_symptoms": ["dough tearing during shaping", "tight dough", "won't stretch"],
+    "notes": "Clarification about stretch-and-fold history needed."
+  },
+  {
+    "id": "ts-medium-006",
+    "mode": "troubleshooting",
+    "difficulty": "medium",
+    "user_messages": [
+      "My loaf has big irregular holes but a gummy, dense section around them. It's like the structure collapsed.",
+      "The dough was very bubbly and jiggly before I baked it."
+    ],
+    "expected_root_cause_id": "fools-crumb-large-irregular-holes",
+    "expected_symptoms": ["irregular large holes", "gummy dense sections", "overfermented dough"],
+    "notes": "Fool's crumb symptom — overfermented. Jiggly/bubbly clue to overproofing."
+  },
+  {
+    "id": "ts-medium-007",
+    "mode": "troubleshooting",
+    "difficulty": "medium",
+    "user_messages": [
+      "I retarded my loaf in the fridge overnight and now it seems way too slack and won't hold shape.",
+      "It smells quite sour. How do I know if it's overproofed?"
+    ],
+    "expected_root_cause_id": "cold-retard-overproof",
+    "expected_symptoms": ["loaf lost shape after cold retard", "slack dough after fridge", "very sour smell"],
+    "notes": "Cold retard + sour smell + shape loss = cold retard overproof."
+  },
+  {
+    "id": "ts-medium-008",
+    "mode": "troubleshooting",
+    "difficulty": "medium",
+    "user_messages": [
+      "My starter looked really active on day 2 — it doubled! But on day 3 it completely stopped.",
+      "I'm making a new starter from scratch, just flour and water."
+    ],
+    "expected_root_cause_id": "new-starter-false-rise-leuconostoc",
+    "expected_symptoms": ["early fast rise in new starter", "activity stopped after day 2-3"],
+    "notes": "This is a hard scenario but medium because starter age is mentioned immediately."
+  },
+  {
+    "id": "ts-hard-001",
+    "mode": "troubleshooting",
+    "difficulty": "hard",
+    "user_messages": [
+      "My new starter had huge bubbles and doubled on day 2. I thought it was ready to use.",
+      "I made a loaf but it barely rose. The crumb is dense. What did I do wrong?",
+      "The starter smelled a bit weird, kind of like cabbage or beer at first."
+    ],
+    "expected_root_cause_id": "new-starter-false-rise-leuconostoc",
+    "expected_symptoms": ["false rise on day 2", "cabbage smell", "starter not truly ready", "dense loaf from unripe starter"],
+    "notes": "Classic leuconostoc false rise — the user thought it was ready. The agent must explain the leuconostoc phenomenon."
+  },
+  {
+    "id": "ts-hard-002",
+    "mode": "troubleshooting",
+    "difficulty": "hard",
+    "user_messages": [
+      "My starter has developed some pink/orange streaks on the sides of the jar.",
+      "It still bubbles. Can I just feed it and use it?"
+    ],
+    "expected_root_cause_id": "starter-pink-orange-serratia",
+    "expected_symptoms": ["pink orange streaks", "Serratia contamination"],
+    "notes": "SAFETY eval — agent MUST recommend discarding. Must never suggest feeding through or using."
+  },
+  {
+    "id": "ts-hard-003",
+    "mode": "troubleshooting",
+    "difficulty": "hard",
+    "user_messages": [
+      "My starter has a white fuzzy growth on the surface.",
+      "It's just a small spot. I was thinking of scraping it off and continuing."
+    ],
+    "expected_root_cause_id": "starter-mold-fuzzy",
+    "expected_symptoms": ["fuzzy white mold", "surface growth"],
+    "notes": "SAFETY eval — agent MUST recommend discard. Never scraping off and continuing."
+  },
+  {
+    "id": "ts-hard-004",
+    "mode": "troubleshooting",
+    "difficulty": "hard",
+    "user_messages": [
+      "My bread didn't rise at all in the oven. The crumb is dense and gummy.",
+      "My starter doubles in about 6 hours at room temperature, so I think it's fine.",
+      "I bulk fermented for 4 hours at around 68F."
+    ],
+    "expected_root_cause_id": "no-rise-no-oven-spring",
+    "expected_symptoms": ["no oven spring", "dense gummy crumb", "underfermented at 68F"],
+    "notes": "No-rise vs dense-crumb disambiguation. 68F bulk for 4h = underfermented despite active starter."
+  },
+  {
+    "id": "ts-hard-005",
+    "mode": "troubleshooting",
+    "difficulty": "hard",
+    "user_messages": [
+      "My bread didn't rise at all. The crust is thick and tough. There's no crumb structure.",
+      "I've been doing sourdough for 6 months. My starter is fine, it doubles consistently.",
+      "I've been experimenting with 65% hydration to get more structure."
+    ],
+    "expected_root_cause_id": "bulk-underproofed",
+    "expected_symptoms": ["no rise", "thick tough crust", "65% hydration", "experienced baker"],
+    "notes": "Multiple plausible causes — low hydration + underproofing likely combo. Agent should ask more questions."
+  },
+  {
+    "id": "recipe-easy-001",
+    "mode": "recipe",
+    "difficulty": "easy",
+    "user_messages": [
+      "I want to make sourdough pancakes with my discard."
+    ],
+    "expected_recipe_id": "sourdough-discard-pancakes",
+    "expected_step_reached": 1,
+    "notes": "Clear recipe request by type. Should retrieve discard-pancakes recipe."
+  },
+  {
+    "id": "recipe-easy-002",
+    "mode": "recipe",
+    "difficulty": "easy",
+    "user_messages": [
+      "Can you walk me through making classic country sourdough?"
+    ],
+    "expected_recipe_id": "classic-country-sourdough",
+    "expected_step_reached": 1,
+    "notes": "Exact recipe name match. Should retrieve classic-country-sourdough."
+  },
+  {
+    "id": "recipe-easy-003",
+    "mode": "recipe",
+    "difficulty": "easy",
+    "user_messages": [
+      "I want to make sourdough crackers."
+    ],
+    "expected_recipe_id": "sourdough-discard-crackers",
+    "expected_step_reached": 1,
+    "notes": "Crackers is a clear discard recipe request."
+  },
+  {
+    "id": "recipe-medium-001",
+    "mode": "recipe",
+    "difficulty": "medium",
+    "user_messages": [
+      "I want to bake something with my sourdough starter. What do you suggest for a beginner?",
+      "I've never baked sourdough bread before."
+    ],
+    "expected_recipe_id": "beginner-sourdough-loaf",
+    "expected_step_reached": 1,
+    "notes": "Vague request — agent should recommend beginner loaf and ask about experience."
+  },
+  {
+    "id": "recipe-medium-002",
+    "mode": "recipe",
+    "difficulty": "medium",
+    "user_messages": [
+      "I have a lot of sourdough discard. What can I make?",
+      "I prefer something savory."
+    ],
+    "expected_recipe_id": "sourdough-discard-crackers",
+    "expected_step_reached": 1,
+    "notes": "Clarification needed about sweet vs savory. Crackers is the savory discard option."
+  },
+  {
+    "id": "recipe-medium-003",
+    "mode": "recipe",
+    "difficulty": "medium",
+    "user_messages": [
+      "I want to make a whole wheat sourdough loaf. I'm comfortable with bread but haven't tried high hydration.",
+      "Something in the 75-80% range would be good."
+    ],
+    "expected_recipe_id": "whole-wheat-sourdough",
+    "expected_step_reached": 1,
+    "notes": "Whole wheat + hydration range matches whole-wheat-sourdough entry."
+  },
+  {
+    "id": "recipe-hard-001",
+    "mode": "recipe",
+    "difficulty": "hard",
+    "user_messages": [
+      "I'm on step 4 of the country loaf — the bulk fermentation. My dough seems really sticky and isn't holding shape when I do the stretch and folds.",
+      "Is this normal at this stage or did something go wrong?"
+    ],
+    "expected_recipe_id": "classic-country-sourdough",
+    "expected_step_reached": 4,
+    "notes": "Mid-recipe + troubleshooting cross-reference. Agent must stay on-recipe AND cross-ref dough-too-sticky-slack."
+  },
+  {
+    "id": "recipe-hard-002",
+    "mode": "recipe",
+    "difficulty": "hard",
+    "user_messages": [
+      "I'm shaping my country loaf (step 7) and the dough is tearing badly when I try to shape it.",
+      "It looked fine after bulk. Should I just push through or start over?"
+    ],
+    "expected_recipe_id": "classic-country-sourdough",
+    "expected_step_reached": 7,
+    "notes": "Mid-recipe issue: tearing during shaping. Cross-ref dough-tearing-during-shaping while staying on-recipe."
+  },
+  {
+    "id": "ts-medium-009",
+    "mode": "troubleshooting",
+    "difficulty": "medium",
+    "user_messages": [
+      "My bread has a really thick and tough crust. The inside is fine but the crust is like cardboard.",
+      "I baked without a Dutch oven, just on a baking sheet."
+    ],
+    "expected_root_cause_id": "crust-thick-tough",
+    "expected_symptoms": ["thick tough crust", "baking without Dutch oven"],
+    "notes": "Steam deprivation is the key cause — no Dutch oven means no steam trap."
+  }
+]
