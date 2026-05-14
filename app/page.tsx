@@ -1,8 +1,13 @@
 "use client";
 
 import { useChat } from "@ai-sdk/react";
-import { useRef, useEffect, useState, FormEvent } from "react";
+import { DefaultChatTransport } from "ai";
+import { useRef, useEffect, useState, FormEvent, useMemo } from "react";
 import { Sidebar } from "@/components/Sidebar";
+import { ModelSelector } from "@/components/ModelSelector";
+import { ApiKeyPanel } from "@/components/ApiKeyPanel";
+
+const DEFAULT_MODEL = "anthropic/claude-sonnet-4-6";
 
 const TOOL_LABELS: Record<string, string> = {
   "tool-lookupKnowledge": "Searching knowledge base",
@@ -11,10 +16,34 @@ const TOOL_LABELS: Record<string, string> = {
 };
 
 export default function Home() {
-  const { messages, sendMessage, status } = useChat();
+  const [modelId, setModelId] = useState(DEFAULT_MODEL);
+  const [userKey, setUserKey] = useState<string | null>(null);
+
+  const headersRef = useRef<Record<string, string>>({});
+  useEffect(() => {
+    const headers: Record<string, string> = { "x-model-id": modelId };
+    if (userKey) headers["x-openrouter-key"] = userKey;
+    headersRef.current = headers;
+  }, [modelId, userKey]);
+
+  const transport = useMemo(
+    () =>
+      new DefaultChatTransport({
+        api: "/api/chat",
+        prepareSendMessagesRequest: ({ body, headers }) => ({
+          body: body ?? {},
+          headers: { ...(headers as Record<string, string>), ...headersRef.current },
+        }),
+      }),
+    []
+  );
+
+  const { messages, sendMessage, status } = useChat({ transport });
   const [input, setInput] = useState("");
   const isLoading = status === "streaming" || status === "submitted";
   const bottomRef = useRef<HTMLDivElement>(null);
+
+  const userMessageCount = messages.filter((m) => m.role === "user").length;
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -30,7 +59,13 @@ export default function Home() {
   return (
     <div className="flex h-screen">
       <div className="flex flex-col flex-1 min-w-0 p-4">
-        <h1 className="text-xl font-semibold mb-4">Sourdough Assistant</h1>
+        <div className="flex items-center justify-between mb-4">
+          <h1 className="text-xl font-semibold">Sourdough Assistant</h1>
+          <div className="flex items-center gap-3">
+            <ModelSelector value={modelId} onChange={setModelId} />
+            <ApiKeyPanel messageCount={userMessageCount} onKeyChange={setUserKey} />
+          </div>
+        </div>
 
         <div className="flex-1 overflow-y-auto space-y-2 mb-4 max-w-2xl w-full mx-auto">
           {messages.map((m) => (
@@ -62,9 +97,7 @@ export default function Home() {
                     >
                       <span
                         className={`w-2 h-2 rounded-full ${
-                          isDone
-                            ? "bg-green-400"
-                            : "bg-yellow-400 animate-pulse"
+                          isDone ? "bg-green-400" : "bg-yellow-400 animate-pulse"
                         }`}
                       />
                       {isDone ? `${label} ✓` : `${label}…`}
