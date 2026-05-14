@@ -10,7 +10,10 @@
   },
   "dependencies": {
     "@ai-sdk/react": "^3.0.184",
+    "@arizeai/openinference-vercel": "^2.7.4",
+    "@arizeai/phoenix-otel": "^1.0.2",
     "@openrouter/ai-sdk-provider": "^2.9.0",
+    "@vercel/otel": "^2.1.2",
     "ai": "^6.0.182",
     "next": "16.2.6",
     "react": "19.2.4",
