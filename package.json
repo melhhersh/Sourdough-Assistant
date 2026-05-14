@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@ai-sdk/openai": "^3.0.63",
     "@ai-sdk/react": "^3.0.184",
     "@arizeai/openinference-vercel": "^2.7.4",
     "@arizeai/phoenix-otel": "^1.0.2",
@@ -27,6 +28,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.6",
     "tailwindcss": "^4",
+    "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   }
 }
