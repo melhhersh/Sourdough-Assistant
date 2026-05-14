@@ -1,0 +1,396 @@
+[
+  {
+    "id": "starter-sluggish-not-doubling",
+    "problem": "Sluggish starter that won't double",
+    "symptoms": "An established starter rises slowly, peaks at less than 2x its original volume, or takes more than 10-12 hours to peak after feeding even though it shows some bubbles.",
+    "causes": [
+      "Ambient temperature below 70F/21C, which roughly halves activity for every 10F drop",
+      "Feeding ratio too low (e.g., 1:1:1) so the starter goes acidic before it can build yeast population",
+      "Flour lacks nutrients (bleached or all-purpose only) and starves the wild yeast and LAB",
+      "Chlorinated tap water inhibiting microbial growth"
+    ],
+    "fixes": [
+      "Move starter to a warm spot (75-82F/24-28C); use a proofing box, the oven with the light on, or top of the fridge",
+      "Switch to a higher feeding ratio of 1:5:5 (e.g., 10g starter + 50g flour + 50g water) and feed every 12 hours for 3-5 days",
+      "Mix in 10-20% whole grain rye or whole wheat flour by weight to boost enzymatic activity and nutrients",
+      "Use filtered or dechlorinated water at 80-90F/27-32C when feeding",
+      "Track peak time across 3 feedings; expect doubling in 4-8 hours once revived"
+    ],
+    "tags": ["starter", "fermentation", "temperature", "flour"]
+  },
+  {
+    "id": "starter-acetone-nail-polish-smell",
+    "problem": "Starter smells like acetone or nail polish remover",
+    "symptoms": "Sharp solvent-like aroma, often accompanied by a layer of dark hooch and a deflated, flat starter that has clearly peaked and fallen.",
+    "causes": [
+      "Starter is starving: yeast and bacteria exhausted available sugars and started metabolizing ethanol into ethyl acetate",
+      "Feeding ratio too low for the ambient temperature (1:1:1 in a warm kitchen burns through food too fast)",
+      "Too long between feedings, especially at room temperature"
+    ],
+    "fixes": [
+      "Feed sooner and more generously: switch to 1:5:5 or 1:10:10 ratio for 2-3 feedings",
+      "Stir hooch back in (adds tang) or pour off (milder flavor) before refeeding",
+      "If kept on the counter, feed every 12 hours; if you can't keep that schedule, refrigerate after peak and feed weekly",
+      "Smell normalizes to yogurt/beer aroma within 1-2 well-fed cycles; don't bake until it does"
+    ],
+    "tags": ["starter", "smell", "fermentation"]
+  },
+  {
+    "id": "starter-hooch-liquid-layer",
+    "problem": "Hooch (gray/brown liquid) on top of starter",
+    "symptoms": "A thin layer of clear, gray, brown, or near-black liquid pools on top of an otherwise normal-looking starter, often with a strong alcoholic smell.",
+    "causes": [
+      "Starter is hungry and fermentation produced excess ethanol that separated out",
+      "Hydration too high relative to flour mass for current feeding schedule",
+      "Long gap between feedings (especially refrigerator storage > 1-2 weeks)"
+    ],
+    "fixes": [
+      "Stir hooch back in for tangier flavor or pour off for milder flavor; either is safe (it is not mold)",
+      "Increase feeding ratio from 1:1:1 to 1:2:2 or 1:3:3 to extend time between meals",
+      "Reduce starter hydration toward 100% (equal weights flour and water) if currently running wetter",
+      "If from fridge: do 2-3 room-temperature feedings at 1:5:5 before using in a bake to fully restore activity"
+    ],
+    "tags": ["starter", "smell", "hydration", "storage"]
+  },
+  {
+    "id": "starter-pink-orange-serratia",
+    "problem": "Pink or orange streaks on starter (Serratia marcescens)",
+    "symptoms": "Bright pink, red, or orange irregular streaks, spots, or film on the surface or through the starter, often with a foul, putrid smell distinct from normal sour aromas.",
+    "causes": [
+      "Contamination by Serratia marcescens or other harmful bacteria, typically from a neglected, underfed starter",
+      "Warm, moist environment with infrequent feedings allowing pathogenic bacteria to outcompete LAB",
+      "Cross-contamination from dirty utensils or jars"
+    ],
+    "fixes": [
+      "Discard the entire starter immediately; do not bake with it or attempt to salvage it (Serratia can cause illness)",
+      "Wash and sanitize the jar, lid, and all utensils with hot soapy water, then dry completely",
+      "Start a new starter from scratch or from reliable backup discard",
+      "Do not confuse with the faint pinkish tinge sometimes seen with rye flour, which is uniform and odorless",
+      "Going forward: feed on schedule, store in fridge between bakes, and keep equipment clean"
+    ],
+    "tags": ["starter", "contamination", "safety"]
+  },
+  {
+    "id": "starter-mold-fuzzy",
+    "problem": "Mold (fuzzy spots) on starter",
+    "symptoms": "Fuzzy or hairy patches on the starter surface in any color: white, green, blue, black, or yellow. Distinct from smooth hooch or rye-induced discoloration.",
+    "causes": [
+      "Long neglect with food sources still present (mold colonizes faster than the starter can re-acidify)",
+      "Contaminated jar, utensil, or flour",
+      "Lid left open allowing airborne spores to settle, especially in humid environments"
+    ],
+    "fixes": [
+      "Discard the entire starter; mold hyphae thread through the whole culture even when only the surface looks fuzzy",
+      "Sterilize the jar with boiling water or run it through a dishwasher cycle",
+      "Start fresh: typical timeline is 7-14 days to a usable starter, 4-8 weeks to full maturity",
+      "Prevent recurrence by feeding on schedule, covering with a cloth or loose lid (not airtight), and not letting the starter sit unfed > 5-7 days at room temp"
+    ],
+    "tags": ["starter", "contamination", "safety"]
+  },
+  {
+    "id": "new-starter-false-rise-leuconostoc",
+    "problem": "New starter rises dramatically on day 2-3 then dies",
+    "symptoms": "A 1-3 day old starter triples in volume, looks foamy and very active, smells sweet/funky/cabbage-like (not sour), then goes flat and shows no activity for several days afterward.",
+    "causes": [
+      "Leuconostoc and other early-stage bacteria producing CO2 before wild yeast establishes; this is a 'false rise', not real leavening",
+      "These bacteria thrive in the early non-acidic environment but die off as pH drops"
+    ],
+    "fixes": [
+      "Do NOT bake with a starter that has only shown a false rise; it has no real yeast power yet",
+      "Keep feeding 1:1:1 twice a day (every 12 hours) at 75-85F/24-29C with whole grain or whole grain blend flour",
+      "Expect a quiet 'dead zone' around days 4-7 as Leuconostoc dies off and wild yeast colonizes",
+      "Once the starter starts rising again predictably, gradually shift to 1:2:2, then 1:5:5 for maintenance",
+      "Wait until starter doubles reliably within 4-8 hours over multiple consecutive feedings before baking (typically 2-4 weeks total)"
+    ],
+    "tags": ["starter", "new-starter", "fermentation"]
+  },
+  {
+    "id": "dough-too-sticky-slack",
+    "problem": "Dough too sticky and slack to handle",
+    "symptoms": "Dough sticks aggressively to hands and bench, will not hold a ball during shaping, spreads out flat in the bowl between folds, and never seems to develop a smooth surface.",
+    "causes": [
+      "Hydration too high for the flour's protein/absorption capacity (common when copying recipes that use stronger flour)",
+      "Insufficient gluten development from too few or too gentle stretch and folds",
+      "Skipping or shortening autolyse, so flour has not fully hydrated",
+      "Over-fermentation: enzymes have begun degrading the gluten network"
+    ],
+    "fixes": [
+      "Reduce hydration by 5% (e.g., 78% -> 73%) on the next bake and reassess; many home bread flours top out around 72-75%",
+      "Add a 30-60 minute autolyse (flour + water only, rest before adding starter and salt)",
+      "Perform 4 sets of stretch-and-folds at 30-minute intervals during the first 2 hours of bulk; dough should noticeably tighten between sets",
+      "Use bread flour at 12-13% protein instead of all-purpose (~10-11%) for high-hydration formulas",
+      "If folds aren't tightening the dough by set 3-4, end bulk early; you're entering over-fermentation"
+    ],
+    "tags": ["dough", "hydration", "gluten", "technique"]
+  },
+  {
+    "id": "dough-too-stiff-dry",
+    "problem": "Dough too stiff and dry",
+    "symptoms": "Dough resists stretching, tears instead of stretching during folds, feels like clay, and produces a dense crumb with poor oven spring.",
+    "causes": [
+      "Hydration too low for the flour (whole grain and rye absorb significantly more water than white)",
+      "Dry kitchen environment pulling moisture from exposed dough",
+      "Inaccurate scaling: using volume measurements instead of weight",
+      "Flour switched to a higher-protein or whole-grain blend without adjusting water"
+    ],
+    "fixes": [
+      "Increase hydration by 3-5% next bake (e.g., 65% -> 70%) and observe handling",
+      "When using whole wheat or rye, add 5-10% extra water vs. an all-white formula at the same hydration",
+      "Always weigh flour and water in grams; cup measurements vary by 20%+",
+      "Use the bassinage technique: hold back 5-10% of the water and add it gradually after initial mix once you see how the flour absorbs",
+      "Cover dough with a tight-fitting lid or damp cloth between folds to prevent skin formation"
+    ],
+    "tags": ["dough", "hydration", "flour", "technique"]
+  },
+  {
+    "id": "dough-tearing-during-shaping",
+    "problem": "Dough tears during pre-shape or final shape",
+    "symptoms": "The dough's outer skin rips when you try to round it, drag it, or build tension on the bench; you see exposed wet interior dough through tears in the surface.",
+    "causes": [
+      "Over-tightening during pre-shape; gluten is already at maximum tension with no slack",
+      "No bench rest between pre-shape and final shape, so dough hasn't relaxed",
+      "Dough is too dry/stiff or over-developed from excessive folds/kneading",
+      "Bench too floured, creating friction that catches and tears the skin"
+    ],
+    "fixes": [
+      "Pre-shape gently: just enough to form a loose round with a barely-taut surface; stop the moment the skin tightens",
+      "Bench rest 20-40 minutes (up to 60 if still tight) between pre-shape and final shape",
+      "Use a lightly damp or bare bench with minimal flour; dust only the top of the dough lightly",
+      "If overworked: skip aggressive shaping moves, just do a simple letter fold and place seam-down in the banneton",
+      "Reduce stretch-and-fold sets from 6 to 3-4 if your dough is consistently tight at shaping"
+    ],
+    "tags": ["dough", "shaping", "gluten", "technique"]
+  },
+  {
+    "id": "bulk-underproofed",
+    "problem": "Underproofed bulk fermentation",
+    "symptoms": "Dough at end of bulk feels dense and tight, has barely risen (< 25-30%), shows few bubbles on the surface, and produces a dense loaf with a tight crumb after baking.",
+    "causes": [
+      "Bulk ended too soon based on a recipe time rather than dough cues",
+      "Cool kitchen (below 70F/21C) slowing fermentation dramatically",
+      "Weak or not-yet-peaked starter at mix",
+      "Low inoculation (< 15% prefermented flour) without extending bulk time"
+    ],
+    "fixes": [
+      "Use an aliquot jar: take a small dough sample at end of mix, mark the level, and end bulk at 50-75% rise for tighter crumb or 75-100% for more open",
+      "Track dough temperature (DT); aim for 76-80F/24-27C and adjust water temperature to hit it",
+      "Rough bulk timing by DT: 80F ~5h, 75F ~7-8h, 70F ~12h, 65F ~16h",
+      "Mix only when starter has roughly doubled and passes the float test",
+      "If you suspect underproof, extend bulk by 1-2 hours and recheck; you can also do a longer warm final proof (1-2 hours) before retarding"
+    ],
+    "tags": ["bulk", "fermentation", "temperature", "structure"]
+  },
+  {
+    "id": "bulk-overproofed",
+    "problem": "Overproofed bulk fermentation",
+    "symptoms": "Dough is very loose and slack, has lost its dome and started to flatten or collapse at the edges of the bowl, smells strongly alcoholic or sour, and shows no spring back when poked.",
+    "causes": [
+      "Bulk went too long for the temperature (frequent in warm kitchens or hot summers)",
+      "Starter was very young/active and fermented faster than expected",
+      "Too high inoculation (> 20-25% prefermented flour) without shortening bulk",
+      "Dough temperature drifted high (> 80F/27C) without timing adjustment"
+    ],
+    "fixes": [
+      "Skip the bench rest, shape immediately and gently with a single letter fold to preserve any remaining gas",
+      "Skip the room-temperature final proof and go straight into a cold retard at 36-39F/2-4C for 2-4 hours, then bake straight from the fridge",
+      "Score deeper than usual to compensate for reduced oven spring",
+      "Future bakes: end bulk earlier (target 50% rise instead of 75-100%), or lower DT by 3-5F by using cooler water",
+      "Consider reducing starter percentage by 5% next time (e.g., 20% -> 15%)"
+    ],
+    "tags": ["bulk", "fermentation", "overproofed", "technique"]
+  },
+  {
+    "id": "cold-retard-overproof",
+    "problem": "Dough overproofs in the fridge during overnight cold retard",
+    "symptoms": "Loaf looks great going into the fridge but emerges flat, slack, and gas-poor; spreads when turned out of the banneton; bakes with little oven spring and a dense crumb.",
+    "causes": [
+      "Refrigerator running warmer than 40F/4C, allowing fermentation to continue actively",
+      "Bulk fermentation ended too late, so dough was already nearly fully proofed before going in",
+      "Too long a warm rest (> 1 hour) after shaping before refrigerating",
+      "Retard time too long for the starter strength and recipe (most loaves want 8-16 hours, not 24-48)"
+    ],
+    "fixes": [
+      "Verify fridge temperature with a thermometer; adjust to 36-39F/2-4C",
+      "End bulk fermentation 15-30 minutes earlier than usual when planning a long retard",
+      "After shaping, get the dough into the fridge within 30-45 minutes (cover loosely with a bag to prevent skin)",
+      "Cap retard at 12-16 hours for typical sourdough; if you need longer, end bulk at 30-40% rise instead of 50-75%",
+      "If already overproofed: bake cold straight from the fridge with deeper scoring"
+    ],
+    "tags": ["fermentation", "cold-proof", "overproofed", "temperature"]
+  },
+  {
+    "id": "no-rise-no-oven-spring",
+    "problem": "Dough does not rise and bread has no oven spring",
+    "symptoms": "Dough barely changes volume during bulk and final proof, comes out of the oven as a flat, dense puck with no rise, often with a smooth uncracked surface (no real opening at the score).",
+    "causes": [
+      "Starter was not at peak activity when mixed (used too early or too late after peak)",
+      "Dough temperature too cold throughout bulk (< 65F/18C), effectively halting fermentation",
+      "Severely underproofed bulk; dough never built enough gas",
+      "Dutch oven or oven not preheated long enough (< 45 min) so initial blast of heat is too weak",
+      "Dead or contaminated starter (very rare if maintained)"
+    ],
+    "fixes": [
+      "Use starter at peak: it should have at least doubled, look domed and bubbly, and pass the float test",
+      "Target dough temperature of 76-78F/24-26C; use a heating pad or oven with light on for warmth",
+      "Preheat oven and Dutch oven to 500F/260C for a full 60 minutes before loading",
+      "Do a starter health check: feed 1:5:5, time the rise; if it doesn't double in 4-8 hours at 78F it needs revival before any bake",
+      "Bake bread at internal temperature 205-210F/96-99C; underbaked loaves will look unrisen even when they were fine"
+    ],
+    "tags": ["fermentation", "bake", "starter", "structure"]
+  },
+  {
+    "id": "loaf-spreads-flat-pancake",
+    "problem": "Loaf spreads flat like a pancake when turned out",
+    "symptoms": "Dough looks fine in the banneton but immediately flows outward into a wide, flat disc when tipped onto parchment or the peel, then bakes wide and short.",
+    "causes": [
+      "Insufficient surface tension from shaping; dough has no taut skin to hold its form",
+      "Over-fermentation has degraded the gluten so it can't support the loaf's weight",
+      "Hydration too high for the flour and the baker's skill level",
+      "Banneton too large for the dough size, allowing the dough to relax sideways"
+    ],
+    "fixes": [
+      "Use the stitching method: after shaping in banneton, wait 10 minutes, then pinch and pull dough from one side to the other in a zigzag to add tension",
+      "Try double shaping: shape, rest 15 minutes, then re-shape with a tighter pull",
+      "Match banneton size to dough: a 750-900g loaf wants an 8-9 inch round or 10x4 inch oval",
+      "Drop hydration by 5% (e.g., 78% -> 73%) until you can shape consistently",
+      "Bake straight from a cold retard; cold dough holds shape much better than room-temp dough during transfer"
+    ],
+    "tags": ["shaping", "structure", "hydration", "overproofed"]
+  },
+  {
+    "id": "no-ear-blowout-scoring",
+    "problem": "No ear, or blowouts on the side of the loaf",
+    "symptoms": "The score doesn't open into a raised lip ('ear'); instead the loaf either stays sealed and bursts unpredictably along the side or base, or the score widens flat without lifting.",
+    "causes": [
+      "Score too shallow (< 1/4 inch) so the dough seals over before it can expand",
+      "Blade held perpendicular (90 degrees) instead of angled, so no flap forms",
+      "Dough at room temperature when scored; too soft for clean cuts",
+      "Insufficient steam in the first 15-20 minutes prevents the crust from staying pliable",
+      "Overproofed dough has nothing left to spring, so the score can't lift"
+    ],
+    "fixes": [
+      "Score at a 30-45 degree angle, holding the lame nearly parallel to the surface, in a single confident stroke about 1/2 inch (1-1.2 cm) deep",
+      "Score directly out of the fridge; cold firm dough cuts cleanly and opens dramatically",
+      "Use one decisive arc rather than multiple sawing strokes",
+      "For a Dutch oven, keep the lid on for the first 20-25 minutes to trap steam",
+      "If blowouts persist along the base: deepen the main score and ensure dough is properly fermented (not over)"
+    ],
+    "tags": ["scoring", "bake", "steam", "technique"]
+  },
+  {
+    "id": "crust-thick-tough",
+    "problem": "Thick, tough, hard crust",
+    "symptoms": "Crust is uncomfortably hard to bite, can be over 1/4 inch thick, sometimes shatters or hurts the gums, and stays hard even hours after cooling.",
+    "causes": [
+      "Bake time too long, especially in the uncovered phase",
+      "Hydration too low (< 70%) producing less internal steam",
+      "Excess flour (especially rice flour) on the loaf surface from bannetons",
+      "Oven temperature too low for the bake duration, drying out crust slowly instead of setting it quickly"
+    ],
+    "fixes": [
+      "Shorten the uncovered bake: e.g., 20 min covered + 15-20 min uncovered at 450F/230C, instead of 30+ min uncovered",
+      "Increase hydration toward 75-78% to generate more steam",
+      "Brush off excess rice flour from the loaf surface before scoring",
+      "Bake hotter for a shorter total time (e.g., 475F/245C for 35-40 min total instead of 425F/220C for 50 min)",
+      "Wrap the hot loaf in a clean cotton tea towel as it cools to soften the crust slightly through trapped moisture"
+    ],
+    "tags": ["crust", "bake", "hydration", "steam"]
+  },
+  {
+    "id": "crust-pale-no-color",
+    "problem": "Pale crust with no browning",
+    "symptoms": "Loaf comes out blonde, tan, or pale yellow rather than golden-brown; crust looks anemic and lacks the flavor depth of a properly baked sourdough.",
+    "causes": [
+      "Oven not hot enough; Maillard browning needs 280-330F/140-165C surface temperatures and reliable heat",
+      "Not enough time in the uncovered phase to drive surface browning",
+      "Overproofed dough: yeast and bacteria consumed nearly all residual sugars, leaving nothing for Maillard reactions",
+      "Oven thermostat reading high (actual temp lower than displayed)",
+      "Dough straight from a long retard with too much acidity slows browning"
+    ],
+    "fixes": [
+      "Verify oven temperature with a separate oven thermometer; recalibrate if needed",
+      "Preheat 60 minutes at 500F/260C before loading",
+      "After removing the lid, bake uncovered until deep golden-brown (15-25 min), not just by the clock",
+      "If consistently pale, bump set temperature up by 25F/15C for the uncovered phase",
+      "End bulk fermentation a touch earlier (preserves residual sugars) and shorten cold retards beyond 16 hours"
+    ],
+    "tags": ["crust", "bake", "temperature"]
+  },
+  {
+    "id": "crust-burning-crumb-undercooked",
+    "problem": "Crust burning before the crumb is cooked",
+    "symptoms": "Outside is dark brown or black with a hard shell, but slicing reveals a gummy, dense, or visibly underbaked center; internal temperature below 200F/93C.",
+    "causes": [
+      "Oven runs hot relative to thermostat",
+      "Bake temperature too high for the loaf size, especially for large or high-hydration loaves",
+      "Loaf positioned too close to the heating element (top or bottom)",
+      "Uncovered phase started too early and ran too long"
+    ],
+    "fixes": [
+      "Verify oven temperature with an external thermometer",
+      "After the initial 20 min covered at 475-500F/245-260C, drop to 425-450F/220-230C for the uncovered phase",
+      "If crust darkens too fast, tent the loaf loosely with foil for the last 10-15 minutes",
+      "Position the rack in the lower-middle of the oven and place a sheet pan on the rack below to deflect bottom heat",
+      "Always bake to internal temperature: 205-210F/96-99C measured in the center; do not rely on color or time alone"
+    ],
+    "tags": ["crust", "bake", "temperature", "crumb"]
+  },
+  {
+    "id": "crumb-gummy",
+    "problem": "Gummy, sticky crumb",
+    "symptoms": "When sliced, the crumb feels wet, dense, and pasty; it sticks to the knife, balls up between fingers, and doesn't have the airy springiness of a properly baked loaf.",
+    "causes": [
+      "Loaf cut before fully cooled (interior continues to cook and set during cooling)",
+      "Underbaked: internal temperature below 200F/93C when pulled",
+      "Underproofed: gluten structure too compact for moisture to escape during the bake",
+      "Severely overproofed: gluten collapsed and gas channels merged, trapping moisture"
+    ],
+    "fixes": [
+      "Cool completely on a wire rack for at least 1-2 hours before slicing; for high-hydration loaves wait 4 hours or more",
+      "Bake to an internal temperature of 205-210F/96-99C; insert thermometer through the bottom",
+      "Diagnose proofing: if crumb is uniformly dense -> underproofed; if collapsed and tunneled with wet spots -> overproofed",
+      "If chronically gummy at correct internal temp, extend uncovered bake by 5-10 minutes or drop oven by 25F and bake 10 minutes longer",
+      "Always weigh loaves; very large loaves (> 1kg dough) need 10-15 minutes additional bake time"
+    ],
+    "tags": ["crumb", "bake", "fermentation"]
+  },
+  {
+    "id": "crumb-dense-tight",
+    "problem": "Dense, tight crumb (uniformly small holes)",
+    "symptoms": "Crumb structure is uniformly compact with very small, evenly-spaced holes throughout; loaf feels heavy for its size and lacks the open, airy texture expected of artisan sourdough.",
+    "causes": [
+      "Underfermented bulk: dough never built enough gas to create open structure",
+      "Weak or immature starter (a new starter needs 4-8 weeks to fully mature)",
+      "Cold dough temperature throughout bulk (< 70F/21C)",
+      "Over-handling at shaping that degassed the dough excessively",
+      "Hydration too low for the desired open crumb"
+    ],
+    "fixes": [
+      "Strengthen starter first: feed 1:5:5 twice daily until it consistently doubles in 4-6 hours and passes the float test",
+      "Extend bulk to a 75-100% rise (use an aliquot jar to measure)",
+      "Hit a dough temperature of 76-80F/24-27C using warm water (calculate: DT*3 - flour temp - room temp = water temp)",
+      "Shape gently with one letter fold and a light final shape; avoid degassing aggressively",
+      "Increase hydration by 3-5% if your flour can handle it (try 70% -> 73-75%)"
+    ],
+    "tags": ["crumb", "fermentation", "starter", "structure"]
+  },
+  {
+    "id": "fools-crumb-large-irregular-holes",
+    "problem": "Fool's crumb (a few huge holes surrounded by dense areas)",
+    "symptoms": "Cross-section shows one or two giant tunnels or caverns near the top, with the rest of the crumb tight, dense, or even gummy; looks 'open' at a glance but the structure is uneven and unsuitable for sandwiches.",
+    "causes": [
+      "Underfermented bulk: gas pooled into a few weak spots instead of distributing evenly",
+      "Insufficient or rushed shaping that didn't pop large existing bubbles or build even tension",
+      "Overly stiff dough that trapped gas in pockets rather than distributing it",
+      "High-protein flour shaped without adequate degassing of large bubbles"
+    ],
+    "fixes": [
+      "Extend bulk fermentation; aim for 75-100% rise on an aliquot jar instead of stopping at 30-50%",
+      "During pre-shape and shape, gently press out any visibly large bubbles you can feel under the surface",
+      "Use a more thorough shaping pattern (letter fold + roll, or stitching) to even out gas distribution",
+      "Check starter vitality: a sluggish starter often produces fool's crumb because bulk had to be cut short",
+      "Reduce dough stiffness slightly with a 2-3% hydration bump if working with strong bread flour"
+    ],
+    "tags": ["crumb", "fermentation", "shaping", "structure"]
+  }
+]
