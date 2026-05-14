@@ -9,23 +9,26 @@ const DEFAULT_MODEL = "anthropic/claude-sonnet-4-6";
 
 const SYSTEM_PROMPT = `You are an expert sourdough baker and troubleshooting assistant. You help bakers diagnose what went wrong with their bread and guide them through sourdough recipes step by step.
 
-You operate in two modes based on what the user needs:
+First determine the user's intent:
+- **Troubleshooting**: they describe a problem (bad crumb, failed starter, scoring issues, etc.)
+- **Recipe**: they want to make something (a loaf, pancakes, crackers, etc.)
 
-**Troubleshooting mode** — when a user describes a problem with their bread, starter, dough, crust, or crumb:
+**Troubleshooting mode:**
 - Call lookupKnowledge to search the knowledge base before answering.
-- Use recordSymptom to record each symptom the user reports (symptom name + severity: low/moderate/high).
+- Use recordSymptom to record each distinct symptom the user reports (symptom + severity: low/moderate/high).
 - Gather at least 1 symptom via recordSymptom before diagnosing.
 - Reason step by step: identify the most likely cause, then recommend one primary fix with concrete details (temperatures in °F/°C, hydration percentages, feeding ratios, timing).
 - Mention alternative causes if relevant.
 - Be specific — "move to 78°F/26°C" is better than "find a warmer spot."
 
-**Recipe mode** — when a user wants to bake something:
+**Recipe mode:**
 - Call lookupKnowledge to find the right recipe before answering.
-- Walk through it step by step, one step at a time unless they ask for the full recipe.
+- Use recordRecipeStep to track which step the user is on (recipeId, stepNumber, stepTitle).
+- Walk through the recipe step by step, one step at a time unless they ask for the full recipe.
 - Answer questions about timing, technique, and visual cues.
-- Proactively surface relevant troubleshooting tips where the user might run into issues.
+- Proactively surface relevant troubleshooting tips where the user might run into issues (mention the related troubleshooting entry ID if relevant).
 
-Always call lookupKnowledge before answering any sourdough question. Base your answer on the retrieved entries. Always maintain the persona of a patient, knowledgeable sourdough mentor.`;
+Always call lookupKnowledge before answering any sourdough question. Base your answer on the retrieved entries. Maintain the persona of a patient, knowledgeable sourdough mentor.`;
 
 export async function POST(req: Request) {
   const body = await req.json();
@@ -72,7 +75,7 @@ export async function POST(req: Request) {
       }),
       recordSymptom: tool({
         description:
-          "Record a symptom the user has described. Call this once per distinct symptom before diagnosing.",
+          "Record a symptom the user has described in troubleshooting mode. Call once per distinct symptom before diagnosing.",
         inputSchema: zodSchema(
           z.object({
             symptom: z
@@ -85,6 +88,36 @@ export async function POST(req: Request) {
         ),
         execute: async ({ symptom, severity }: { symptom: string; severity: string }) => {
           return { recorded: true, symptom, severity };
+        },
+      }),
+      recordRecipeStep: tool({
+        description:
+          "Track which recipe step the user is on in recipe mode. Call when the user begins or asks about a specific step.",
+        inputSchema: zodSchema(
+          z.object({
+            recipeId: z
+              .string()
+              .describe("The ID of the recipe from the knowledge base, e.g. 'classic-country-sourdough'."),
+            stepNumber: z.number().describe("The 1-based step number the user is currently on."),
+            stepTitle: z.string().optional().describe("The title of the step, e.g. 'Autolyse'."),
+            userQuestion: z
+              .string()
+              .optional()
+              .describe("The user's question or concern about this step."),
+          })
+        ),
+        execute: async ({
+          recipeId,
+          stepNumber,
+          stepTitle,
+          userQuestion,
+        }: {
+          recipeId: string;
+          stepNumber: number;
+          stepTitle?: string;
+          userQuestion?: string;
+        }) => {
+          return { recorded: true, recipeId, stepNumber, stepTitle, userQuestion };
         },
       }),
     },
