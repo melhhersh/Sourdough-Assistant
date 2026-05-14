@@ -13,7 +13,8 @@ You operate in two modes based on what the user needs:
 
 **Troubleshooting mode** — when a user describes a problem with their bread, starter, dough, crust, or crumb:
 - Call lookupKnowledge to search the knowledge base before answering.
-- Ask clarifying questions to gather at least the main symptom before diagnosing.
+- Use recordSymptom to record each symptom the user reports (symptom name + severity: low/moderate/high).
+- Gather at least 1 symptom via recordSymptom before diagnosing.
 - Reason step by step: identify the most likely cause, then recommend one primary fix with concrete details (temperatures in °F/°C, hydration percentages, feeding ratios, timing).
 - Mention alternative causes if relevant.
 - Be specific — "move to 78°F/26°C" is better than "find a warmer spot."
@@ -29,10 +30,13 @@ Always call lookupKnowledge before answering any sourdough question. Base your a
 export async function POST(req: Request) {
   const body = await req.json();
   const messages: UIMessage[] = body.messages ?? [];
+  const sessionId: string = body.id ?? "unknown";
 
   const modelId = req.headers.get("x-model-id") ?? DEFAULT_MODEL;
+  const userKey = req.headers.get("x-openrouter-key");
+
   const openrouter = createOpenRouter({
-    apiKey: process.env.OPENROUTER_API_KEY,
+    apiKey: userKey ?? process.env.OPENROUTER_API_KEY,
   });
 
   const embeddingModel = openai.embedding("text-embedding-3-small");
@@ -66,8 +70,33 @@ export async function POST(req: Request) {
           }));
         },
       }),
+      recordSymptom: tool({
+        description:
+          "Record a symptom the user has described. Call this once per distinct symptom before diagnosing.",
+        inputSchema: zodSchema(
+          z.object({
+            symptom: z
+              .string()
+              .describe("A short description of the symptom, e.g. 'gummy crumb'."),
+            severity: z
+              .enum(["low", "moderate", "high"])
+              .describe("How severe the symptom appears based on the user's description."),
+          })
+        ),
+        execute: async ({ symptom, severity }: { symptom: string; severity: string }) => {
+          return { recorded: true, symptom, severity };
+        },
+      }),
     },
-    experimental_telemetry: { isEnabled: true, functionId: "sourdough-chat" },
+    experimental_telemetry: {
+      isEnabled: true,
+      functionId: "sourdough-chat",
+      metadata: {
+        session_id: sessionId,
+        model_id: modelId,
+        key_source: userKey ? "user" : "fallback",
+      },
+    },
   });
 
   return result.toUIMessageStreamResponse();
