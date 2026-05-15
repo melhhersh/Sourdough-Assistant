@@ -1,26 +1,33 @@
-export async function register() {
-  const { registerOTel } = await import("@vercel/otel");
-  const { OpenInferenceSimpleSpanProcessor } = await import(
-    "@arizeai/openinference-vercel"
-  );
-  const { OTLPTraceExporter } = await import(
-    "@opentelemetry/exporter-trace-otlp-proto"
-  );
+import { NodeTracerProvider } from "@opentelemetry/sdk-trace-node";
+import { resourceFromAttributes } from "@opentelemetry/resources";
+import { OTLPTraceExporter } from "@opentelemetry/exporter-trace-otlp-proto";
+import {
+  isOpenInferenceSpan,
+  OpenInferenceSimpleSpanProcessor,
+} from "@arizeai/openinference-vercel";
 
-  const exporter = new OTLPTraceExporter({
-    url: process.env.PHOENIX_COLLECTOR_ENDPOINT,
-    headers: {
-      authorization: `Bearer ${process.env.PHOENIX_API_KEY}`,
-    },
-  });
+const projectName = process.env.ARIZE_PROJECT_NAME ?? "sourdough-assistant";
 
-  registerOTel({
-    serviceName: "sourdough-assistant",
-    attributes: {
-      "project.name": "sourdough-assistant",
-    },
-    spanProcessors: [
-      new OpenInferenceSimpleSpanProcessor({ exporter }),
-    ],
-  });
+export const provider = new NodeTracerProvider({
+  resource: resourceFromAttributes({
+    model_id: projectName,
+    model_version: "1.0.0",
+    "service.name": projectName,
+  }),
+  spanProcessors: [
+    new OpenInferenceSimpleSpanProcessor({
+      exporter: new OTLPTraceExporter({
+        url: "https://otlp.arize.com/v1/traces",
+        headers: {
+          space_id: process.env.ARIZE_SPACE_ID ?? "",
+          api_key: process.env.ARIZE_API_KEY ?? "",
+        },
+      }),
+      spanFilter: isOpenInferenceSpan,
+    }),
+  ],
+});
+
+export function register() {
+  provider.register();
 }

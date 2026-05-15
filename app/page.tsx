@@ -7,6 +7,7 @@ import ReactMarkdown from "react-markdown";
 import { Sidebar } from "@/components/Sidebar";
 import { ModelSelector } from "@/components/ModelSelector";
 import { ApiKeyPanel } from "@/components/ApiKeyPanel";
+import { PersonalitySelector, PERSONALITIES } from "@/components/PersonalitySelector";
 
 const DEFAULT_MODEL = "deepseek/deepseek-chat";
 
@@ -19,13 +20,17 @@ const TOOL_LABELS: Record<string, string> = {
 export default function Home() {
   const [modelId, setModelId] = useState(DEFAULT_MODEL);
   const [userKey, setUserKey] = useState<string | null>(null);
+  const [personalityId, setPersonalityId] = useState("neutral");
 
   const headersRef = useRef<Record<string, string>>({});
   useEffect(() => {
-    const headers: Record<string, string> = { "x-model-id": modelId };
+    const headers: Record<string, string> = {
+      "x-model-id": modelId,
+      "x-personality-id": personalityId,
+    };
     if (userKey) headers["x-openrouter-key"] = userKey;
     headersRef.current = headers;
-  }, [modelId, userKey]);
+  }, [modelId, userKey, personalityId]);
 
   const transport = useMemo(
     () =>
@@ -75,6 +80,7 @@ export default function Home() {
             </div>
           </div>
           <div className="flex items-center gap-3">
+            <PersonalitySelector value={personalityId} onChange={setPersonalityId} />
             <ModelSelector value={modelId} onChange={setModelId} />
             <ApiKeyPanel messageCount={userMessageCount} onKeyChange={setUserKey} />
           </div>
