@@ -1,5 +1,5 @@
 import { embed } from "ai";
-import { openai } from "@ai-sdk/openai";
+import { createOpenAI } from "@ai-sdk/openai";
 import { readFileSync, writeFileSync } from "fs";
 import { join } from "path";
 
@@ -50,7 +50,11 @@ function recipeText(entry: RecipeEntry): string {
 }
 
 async function main() {
-  const model = openai.embedding("text-embedding-3-small");
+  const openrouter = createOpenAI({
+    baseURL: "https://openrouter.ai/api/v1",
+    apiKey: process.env.OPENROUTER_API_KEY,
+  });
+  const model = openrouter.embedding("openai/text-embedding-3-small");
 
   const knowledge: TroubleshootingEntry[] = JSON.parse(
     readFileSync(join(DATA_DIR, "sourdough-knowledge.json"), "utf-8")

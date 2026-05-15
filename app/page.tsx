@@ -3,11 +3,12 @@
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
 import { useRef, useEffect, useState, FormEvent, useMemo } from "react";
+import ReactMarkdown from "react-markdown";
 import { Sidebar } from "@/components/Sidebar";
 import { ModelSelector } from "@/components/ModelSelector";
 import { ApiKeyPanel } from "@/components/ApiKeyPanel";
 
-const DEFAULT_MODEL = "anthropic/claude-sonnet-4-6";
+const DEFAULT_MODEL = "deepseek/deepseek-chat";
 
 const TOOL_LABELS: Record<string, string> = {
   "tool-lookupKnowledge": "Searching knowledge base",
@@ -30,15 +31,15 @@ export default function Home() {
     () =>
       new DefaultChatTransport({
         api: "/api/chat",
-        prepareSendMessagesRequest: ({ body, headers }) => ({
-          body: body ?? {},
+        prepareSendMessagesRequest: ({ id, messages, body, headers }) => ({
+          body: { ...body, id, messages },
           headers: { ...(headers as Record<string, string>), ...headersRef.current },
         }),
       }),
     []
   );
 
-  const { messages, sendMessage, status } = useChat({ transport });
+  const { messages, sendMessage, status, error } = useChat({ transport });
   const [input, setInput] = useState("");
   const isLoading = status === "streaming" || status === "submitted";
   const bottomRef = useRef<HTMLDivElement>(null);
@@ -82,7 +83,26 @@ export default function Home() {
                       <span className="text-xs font-medium text-gray-500 block mb-1">
                         {m.role === "user" ? "You" : "Assistant"}
                       </span>
-                      <p className="whitespace-pre-wrap">{part.text}</p>
+                      {m.role === "user" ? (
+                        <p className="whitespace-pre-wrap">{part.text}</p>
+                      ) : (
+                        <ReactMarkdown
+                          components={{
+                            p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
+                            ul: ({ children }) => <ul className="list-disc pl-4 mb-2 space-y-1">{children}</ul>,
+                            ol: ({ children }) => <ol className="list-decimal pl-4 mb-2 space-y-1">{children}</ol>,
+                            li: ({ children }) => <li>{children}</li>,
+                            strong: ({ children }) => <strong className="font-semibold">{children}</strong>,
+                            code: ({ children }) => <code className="bg-gray-200 rounded px-1 py-0.5 text-xs font-mono">{children}</code>,
+                            pre: ({ children }) => <pre className="bg-gray-200 rounded p-2 text-xs font-mono overflow-x-auto mb-2">{children}</pre>,
+                            h1: ({ children }) => <h1 className="font-bold text-base mb-1">{children}</h1>,
+                            h2: ({ children }) => <h2 className="font-bold text-sm mb-1">{children}</h2>,
+                            h3: ({ children }) => <h3 className="font-semibold text-sm mb-1">{children}</h3>,
+                          }}
+                        >
+                          {part.text}
+                        </ReactMarkdown>
+                      )}
                     </div>
                   );
                 }
@@ -108,6 +128,17 @@ export default function Home() {
               })}
             </div>
           ))}
+          {error && (
+            <div className="p-3 rounded-lg mb-2 bg-red-50 border border-red-200 text-red-700 text-sm mr-8">
+              <span className="font-medium">Error: </span>{error.message}
+            </div>
+          )}
+          {status === "submitted" && (
+            <div className="flex items-center gap-2 text-xs text-gray-400 py-1">
+              <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
+              Waiting for response…
+            </div>
+          )}
           <div ref={bottomRef} />
         </div>
 

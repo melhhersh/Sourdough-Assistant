@@ -1,13 +1,20 @@
-import { streamText, convertToModelMessages, UIMessage, tool, zodSchema, stepCountIs } from "ai";
+import {
+  streamText,
+  convertToModelMessages,
+  UIMessage,
+  tool,
+  zodSchema,
+  stepCountIs,
+} from "ai";
 import { createOpenRouter } from "@openrouter/ai-sdk-provider";
-import { openai } from "@ai-sdk/openai";
+import { createOpenAI } from "@ai-sdk/openai";
 import { embed } from "ai";
 import { retrieveKnowledge } from "@/lib/knowledge-base";
 import { z } from "zod";
 
 const DEFAULT_MODEL = "anthropic/claude-sonnet-4-6";
 
-const SYSTEM_PROMPT = `You are an expert sourdough baker and troubleshooting assistant. You help bakers diagnose what went wrong with their bread and guide them through sourdough recipes step by step.
+const SYSTEM_PROMPT = `You are a sassy expert sourdough baker and troubleshooting assistant. You help bakers diagnose what went wrong with their bread and guide them through sourdough recipes step by step with your flare and spunk.
 
 First determine the user's intent:
 - **Troubleshooting**: they describe a problem (bad crumb, failed starter, scoring issues, etc.)
@@ -38,17 +45,52 @@ export async function POST(req: Request) {
   const modelId = req.headers.get("x-model-id") ?? DEFAULT_MODEL;
   const userKey = req.headers.get("x-openrouter-key");
 
+  console.log(
+    `[chat] session=${sessionId} model=${modelId} messages=${messages.length} key=${userKey ? "user" : "fallback"}`,
+  );
+
+  if (messages.length === 0) {
+    console.error("[chat] Empty messages array received");
+    return new Response(JSON.stringify({ error: "No messages provided" }), {
+      status: 400,
+    });
+  }
+
   const openrouter = createOpenRouter({
     apiKey: userKey ?? process.env.OPENROUTER_API_KEY,
   });
 
-  const embeddingModel = openai.embedding("text-embedding-3-small");
+  const openrouterOpenAI = createOpenAI({
+    baseURL: "https://openrouter.ai/api/v1",
+    apiKey: userKey ?? process.env.OPENROUTER_API_KEY,
+  });
+  const embeddingModel = openrouterOpenAI.embedding(
+    "openai/text-embedding-3-small",
+  );
+
+  let modelMessages;
+  try {
+    modelMessages = await convertToModelMessages(messages);
+    console.log(`[chat] converted ${modelMessages.length} model messages`);
+  } catch (err) {
+    console.error("[chat] convertToModelMessages failed:", err);
+    return new Response(
+      JSON.stringify({ error: "Failed to convert messages" }),
+      { status: 400 },
+    );
+  }
 
   const result = streamText({
     model: openrouter(modelId),
     system: SYSTEM_PROMPT,
-    messages: await convertToModelMessages(messages),
+    messages: modelMessages,
+    maxOutputTokens: 2048,
     stopWhen: stepCountIs(5),
+    onError: (err) => console.error("[chat] streamText error:", err),
+    onFinish: ({ usage, finishReason }) =>
+      console.log(
+        `[chat] done finishReason=${finishReason} tokens=${JSON.stringify(usage)}`,
+      ),
     tools: {
       lookupKnowledge: tool({
         description:
@@ -58,13 +100,20 @@ export async function POST(req: Request) {
             query: z
               .string()
               .describe(
-                "The search query — describe the problem or recipe the user is asking about."
+                "The search query — describe the problem or recipe the user is asking about.",
               ),
-          })
+          }),
         ),
         execute: async ({ query }: { query: string }) => {
-          const { embedding } = await embed({ model: embeddingModel, value: query });
+          console.log(`[chat] lookupKnowledge query="${query}"`);
+          const { embedding } = await embed({
+            model: embeddingModel,
+            value: query,
+          });
           const results = await retrieveKnowledge(embedding, 3);
+          console.log(
+            `[chat] lookupKnowledge returned ${results.length} results: ${results.map((r) => r.id).join(", ")}`,
+          );
           return results.map((r) => ({
             id: r.id,
             type: r.type,
@@ -80,13 +129,23 @@ export async function POST(req: Request) {
           z.object({
             symptom: z
               .string()
-              .describe("A short description of the symptom, e.g. 'gummy crumb'."),
+              .describe(
+                "A short description of the symptom, e.g. 'gummy crumb'.",
+              ),
             severity: z
               .enum(["low", "moderate", "high"])
-              .describe("How severe the symptom appears based on the user's description."),
-          })
+              .describe(
+                "How severe the symptom appears based on the user's description.",
+              ),
+          }),
         ),
-        execute: async ({ symptom, severity }: { symptom: string; severity: string }) => {
+        execute: async ({
+          symptom,
+          severity,
+        }: {
+          symptom: string;
+          severity: string;
+        }) => {
           return { recorded: true, symptom, severity };
         },
       }),
@@ -97,14 +156,21 @@ export async function POST(req: Request) {
           z.object({
             recipeId: z
               .string()
-              .describe("The ID of the recipe from the knowledge base, e.g. 'classic-country-sourdough'."),
-            stepNumber: z.number().describe("The 1-based step number the user is currently on."),
-            stepTitle: z.string().optional().describe("The title of the step, e.g. 'Autolyse'."),
+              .describe(
+                "The ID of the recipe from the knowledge base, e.g. 'classic-country-sourdough'.",
+              ),
+            stepNumber: z
+              .number()
+              .describe("The 1-based step number the user is currently on."),
+            stepTitle: z
+              .string()
+              .optional()
+              .describe("The title of the step, e.g. 'Autolyse'."),
             userQuestion: z
               .string()
               .optional()
               .describe("The user's question or concern about this step."),
-          })
+          }),
         ),
         execute: async ({
           recipeId,
@@ -117,7 +183,13 @@ export async function POST(req: Request) {
           stepTitle?: string;
           userQuestion?: string;
         }) => {
-          return { recorded: true, recipeId, stepNumber, stepTitle, userQuestion };
+          return {
+            recorded: true,
+            recipeId,
+            stepNumber,
+            stepTitle,
+            userQuestion,
+          };
         },
       }),
     },

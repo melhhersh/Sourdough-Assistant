@@ -162,20 +162,6 @@ Each commit message captures the eval delta so the narrative is in the git histo
 
 ---
 
-## Phase 7 — Model comparison + PM deliverables (2 commits)
-
-### 7.1 Model comparison run
-- Eval notebook loop over the 5 OpenRouter models per PLAN.md §6.
-- Commit: `feat(evals): cross-model comparison run across 5 OpenRouter models`.
-
-### 7.2 PM artifacts
-- Finalize Artifact 1 (onboarding reflection) from the Capture Log.
-- Write Artifact 2 (product proposal) — pick one of A/B/C/D from PLAN.md or a fresh angle.
-- Produce Artifact 3 (mock/diagram).
-- Commit: `docs: PM deliverables (onboarding reflection, product proposal, mock)`.
-
----
-
 ## Verifiable checkpoints
 
 These map to PLAN.md §Verification but are tied to specific commits, so we can show progress at any moment:

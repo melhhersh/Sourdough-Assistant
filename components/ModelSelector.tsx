@@ -1,10 +1,10 @@
 "use client";
 
 const MODELS = [
-  { id: "anthropic/claude-sonnet-4-6", label: "Claude Sonnet 4.6" },
+  { id: "deepseek/deepseek-chat", label: "DeepSeek V3" },
   { id: "anthropic/claude-haiku-4-5", label: "Claude Haiku 4.5" },
+  { id: "anthropic/claude-sonnet-4-6", label: "Claude Sonnet 4.6" },
   { id: "google/gemini-flash-2.0", label: "Gemini Flash 2.0" },
-  { id: "meta-llama/llama-3.3-70b-instruct", label: "Llama 3.3 70B" },
   { id: "mistralai/mistral-small", label: "Mistral Small" },
 ];
 
