@@ -58,109 +58,152 @@ export default function Home() {
   }
 
   return (
-    <div className="flex h-screen">
-      <div className="flex flex-col flex-1 min-w-0 p-4">
-        <div className="flex items-center justify-between mb-4">
-          <h1 className="text-xl font-semibold">Sourdough Assistant</h1>
+    <div className="flex h-screen bg-[#fdf8f0]">
+      {/* Main chat column */}
+      <div className="flex flex-col flex-1 min-w-0">
+        {/* Header */}
+        <header className="flex items-center justify-between px-6 py-4 border-b border-[#e8d5b7] bg-[#fef9f0]/80 backdrop-blur-sm shrink-0">
+          <div className="flex items-center gap-3">
+            <span className="text-2xl" role="img" aria-label="bread">🍞</span>
+            <div>
+              <h1 className="text-base font-semibold text-[#2c1a0e] tracking-tight leading-none">
+                Sourdough Assistant
+              </h1>
+              <p className="text-[10px] text-[#a0522d] mt-0.5 font-medium uppercase tracking-widest">
+                Artisan bread guidance
+              </p>
+            </div>
+          </div>
           <div className="flex items-center gap-3">
             <ModelSelector value={modelId} onChange={setModelId} />
             <ApiKeyPanel messageCount={userMessageCount} onKeyChange={setUserKey} />
           </div>
-        </div>
+        </header>
 
-        <div className="flex-1 overflow-y-auto space-y-2 mb-4 max-w-2xl w-full mx-auto">
-          {messages.map((m) => (
-            <div key={m.id}>
-              {m.parts.map((part, i) => {
-                if (part.type === "text") {
-                  return (
-                    <div
-                      key={i}
-                      className={`p-3 rounded-lg mb-2 ${
-                        m.role === "user" ? "bg-blue-100 ml-8" : "bg-gray-100 mr-8"
-                      }`}
-                    >
-                      <span className="text-xs font-medium text-gray-500 block mb-1">
-                        {m.role === "user" ? "You" : "Assistant"}
-                      </span>
-                      {m.role === "user" ? (
-                        <p className="whitespace-pre-wrap">{part.text}</p>
-                      ) : (
-                        <ReactMarkdown
-                          components={{
-                            p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
-                            ul: ({ children }) => <ul className="list-disc pl-4 mb-2 space-y-1">{children}</ul>,
-                            ol: ({ children }) => <ol className="list-decimal pl-4 mb-2 space-y-1">{children}</ol>,
-                            li: ({ children }) => <li>{children}</li>,
-                            strong: ({ children }) => <strong className="font-semibold">{children}</strong>,
-                            code: ({ children }) => <code className="bg-gray-200 rounded px-1 py-0.5 text-xs font-mono">{children}</code>,
-                            pre: ({ children }) => <pre className="bg-gray-200 rounded p-2 text-xs font-mono overflow-x-auto mb-2">{children}</pre>,
-                            h1: ({ children }) => <h1 className="font-bold text-base mb-1">{children}</h1>,
-                            h2: ({ children }) => <h2 className="font-bold text-sm mb-1">{children}</h2>,
-                            h3: ({ children }) => <h3 className="font-semibold text-sm mb-1">{children}</h3>,
-                          }}
+        {/* Messages */}
+        <div className="flex-1 overflow-y-auto px-4 py-6">
+          <div className="max-w-2xl mx-auto space-y-4">
+            {messages.length === 0 && (
+              <div className="text-center py-16">
+                <div className="text-5xl mb-4">🌾</div>
+                <p className="text-[#a0522d] font-medium">Ask me anything about sourdough.</p>
+                <p className="text-[#c8956c] text-sm mt-1">Starters, hydration, baking schedules — I&apos;ve got you.</p>
+              </div>
+            )}
+
+            {messages.map((m) => (
+              <div key={m.id}>
+                {m.parts.map((part, i) => {
+                  if (part.type === "text") {
+                    const isUser = m.role === "user";
+                    return (
+                      <div
+                        key={i}
+                        className={`flex ${isUser ? "justify-end" : "justify-start"} mb-1`}
+                      >
+                        <div
+                          className={`max-w-[85%] px-4 py-3 rounded-2xl text-sm leading-relaxed ${
+                            isUser
+                              ? "bg-[#8b4513] text-[#fef9f0] rounded-br-sm shadow-sm"
+                              : "bg-white border border-[#e8d5b7] text-[#2c1a0e] rounded-bl-sm shadow-sm"
+                          }`}
                         >
-                          {part.text}
-                        </ReactMarkdown>
-                      )}
-                    </div>
-                  );
-                }
-                const label = TOOL_LABELS[part.type];
-                if (label) {
-                  const isDone =
-                    "state" in part && part.state === "output-available";
-                  return (
-                    <div
-                      key={i}
-                      className="flex items-center gap-2 text-xs text-gray-500 py-1"
-                    >
-                      <span
-                        className={`w-2 h-2 rounded-full ${
-                          isDone ? "bg-green-400" : "bg-yellow-400 animate-pulse"
-                        }`}
-                      />
-                      {isDone ? `${label} ✓` : `${label}…`}
-                    </div>
-                  );
-                }
-                return null;
-              })}
-            </div>
-          ))}
-          {error && (
-            <div className="p-3 rounded-lg mb-2 bg-red-50 border border-red-200 text-red-700 text-sm mr-8">
-              <span className="font-medium">Error: </span>{error.message}
-            </div>
-          )}
-          {status === "submitted" && (
-            <div className="flex items-center gap-2 text-xs text-gray-400 py-1">
-              <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
-              Waiting for response…
-            </div>
-          )}
-          <div ref={bottomRef} />
+                          <span
+                            className={`text-[10px] font-semibold uppercase tracking-widest block mb-1.5 ${
+                              isUser ? "text-[#f5c97a]" : "text-[#a0522d]"
+                            }`}
+                          >
+                            {isUser ? "You" : "Baker Bot"}
+                          </span>
+                          {isUser ? (
+                            <p className="whitespace-pre-wrap">{part.text}</p>
+                          ) : (
+                            <ReactMarkdown
+                              components={{
+                                p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
+                                ul: ({ children }) => <ul className="list-disc pl-4 mb-2 space-y-1">{children}</ul>,
+                                ol: ({ children }) => <ol className="list-decimal pl-4 mb-2 space-y-1">{children}</ol>,
+                                li: ({ children }) => <li>{children}</li>,
+                                strong: ({ children }) => <strong className="font-semibold text-[#6b3a1f]">{children}</strong>,
+                                code: ({ children }) => <code className="bg-[#f5ece0] rounded px-1 py-0.5 text-xs font-mono text-[#8b4513]">{children}</code>,
+                                pre: ({ children }) => <pre className="bg-[#f5ece0] rounded-lg p-3 text-xs font-mono overflow-x-auto mb-2 border border-[#e8d5b7]">{children}</pre>,
+                                h1: ({ children }) => <h1 className="font-bold text-base mb-1 text-[#2c1a0e]">{children}</h1>,
+                                h2: ({ children }) => <h2 className="font-bold text-sm mb-1 text-[#2c1a0e]">{children}</h2>,
+                                h3: ({ children }) => <h3 className="font-semibold text-sm mb-1 text-[#6b3a1f]">{children}</h3>,
+                              }}
+                            >
+                              {part.text}
+                            </ReactMarkdown>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  }
+
+                  const label = TOOL_LABELS[part.type];
+                  if (label) {
+                    const isDone = "state" in part && part.state === "output-available";
+                    return (
+                      <div key={i} className="flex items-center gap-2 text-xs text-[#a0522d] py-1 px-1">
+                        <span
+                          className={`w-1.5 h-1.5 rounded-full shrink-0 ${
+                            isDone ? "bg-[#6b8f3e]" : "bg-[#f5c97a] animate-pulse"
+                          }`}
+                        />
+                        <span className={isDone ? "text-[#6b8f3e]" : "text-[#c8956c]"}>
+                          {isDone ? `${label} ✓` : `${label}…`}
+                        </span>
+                      </div>
+                    );
+                  }
+                  return null;
+                })}
+              </div>
+            ))}
+
+            {error && (
+              <div className="flex justify-start">
+                <div className="max-w-[85%] px-4 py-3 rounded-2xl rounded-bl-sm bg-[#fef2f2] border border-[#fca5a5] text-[#991b1b] text-sm">
+                  <span className="text-[10px] font-semibold uppercase tracking-widest block mb-1.5 text-[#dc2626]">Error</span>
+                  {error.message}
+                </div>
+              </div>
+            )}
+
+            {status === "submitted" && (
+              <div className="flex items-center gap-2 text-xs text-[#c8956c] py-1 px-1">
+                <span className="flex gap-0.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#d4956a] animate-bounce" style={{ animationDelay: "0ms" }} />
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#d4956a] animate-bounce" style={{ animationDelay: "150ms" }} />
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#d4956a] animate-bounce" style={{ animationDelay: "300ms" }} />
+                </span>
+                <span>Proofing a response…</span>
+              </div>
+            )}
+
+            <div ref={bottomRef} />
+          </div>
         </div>
 
-        <form
-          onSubmit={handleSubmit}
-          className="flex gap-2 max-w-2xl w-full mx-auto"
-        >
-          <input
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="Ask about sourdough…"
-            className="flex-1 border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            disabled={isLoading}
-          />
-          <button
-            type="submit"
-            disabled={isLoading || !input.trim()}
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg disabled:opacity-50 hover:bg-blue-700 transition-colors"
-          >
-            {isLoading ? "…" : "Send"}
-          </button>
-        </form>
+        {/* Input */}
+        <div className="shrink-0 px-4 pb-5 pt-3 border-t border-[#e8d5b7] bg-[#fef9f0]/80 backdrop-blur-sm">
+          <form onSubmit={handleSubmit} className="flex gap-2 max-w-2xl mx-auto">
+            <input
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="Ask about sourdough…"
+              className="flex-1 bg-white border border-[#e8d5b7] rounded-xl px-4 py-2.5 text-sm text-[#2c1a0e] placeholder-[#c8956c] focus:outline-none focus:ring-2 focus:ring-[#d4956a] focus:border-transparent transition-shadow"
+              disabled={isLoading}
+            />
+            <button
+              type="submit"
+              disabled={isLoading || !input.trim()}
+              className="px-5 py-2.5 bg-[#8b4513] text-[#fef9f0] rounded-xl text-sm font-medium disabled:opacity-40 hover:bg-[#6b3a1f] active:scale-95 transition-all shadow-sm"
+            >
+              {isLoading ? "…" : "Send"}
+            </button>
+          </form>
+        </div>
       </div>
 
       <Sidebar messages={messages} />

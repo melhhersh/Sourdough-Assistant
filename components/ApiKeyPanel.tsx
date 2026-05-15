@@ -47,44 +47,59 @@ export function ApiKeyPanel({ messageCount, onKeyChange }: ApiKeyPanelProps) {
     <div className="relative">
       <button
         onClick={() => setIsOpen((o) => !o)}
-        className="text-xs px-2 py-1 border rounded hover:bg-gray-50 transition-colors"
+        className={`text-xs px-3 py-1.5 rounded-lg border transition-all font-medium ${
+          usingUserKey
+            ? "bg-[#f0fdf4] border-[#bbf7d0] text-[#166534] hover:bg-[#dcfce7]"
+            : "bg-white border-[#e8d5b7] text-[#6b3a1f] hover:bg-[#fdf3e3]"
+        }`}
       >
         {usingUserKey
-          ? "Using your key"
-          : `Shared key (${fallbackUsed}/${maxFallback})`}
+          ? "✓ Your key"
+          : `${fallbackUsed}/${maxFallback} msgs`}
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 top-8 z-10 bg-white border rounded-lg shadow-lg p-3 w-72">
-          <p className="text-xs font-medium text-gray-700 mb-2">OpenRouter API Key</p>
-          <p className="text-xs text-gray-500 mb-2">
-            Paste your own key for unlimited messages. Stored in localStorage only.
-          </p>
-          <input
-            type="password"
-            value={key}
-            onChange={(e) => setKey(e.target.value)}
-            placeholder="sk-or-..."
-            className="w-full text-xs border rounded px-2 py-1.5 mb-2 focus:outline-none focus:ring-1 focus:ring-blue-400"
+        <>
+          {/* Backdrop */}
+          <div
+            className="fixed inset-0 z-10"
+            onClick={() => setIsOpen(false)}
           />
-          <div className="flex gap-2">
-            <button
-              onClick={save}
-              disabled={!key.trim()}
-              className="flex-1 text-xs px-2 py-1 bg-blue-600 text-white rounded disabled:opacity-50 hover:bg-blue-700"
-            >
-              Save
-            </button>
-            {saved && (
+          <div className="absolute right-0 top-9 z-20 bg-white border border-[#e8d5b7] rounded-2xl shadow-xl p-4 w-72">
+            <div className="flex items-center gap-2 mb-3">
+              <span className="text-base">🔑</span>
+              <p className="text-sm font-semibold text-[#2c1a0e]">OpenRouter API Key</p>
+            </div>
+            <p className="text-xs text-[#a0522d] mb-3 leading-relaxed">
+              Paste your own key for unlimited messages. Stored in localStorage only.
+            </p>
+            <input
+              type="password"
+              value={key}
+              onChange={(e) => setKey(e.target.value)}
+              placeholder="sk-or-..."
+              className="w-full text-xs bg-[#fdf8f0] border border-[#e8d5b7] rounded-lg px-3 py-2 mb-3 text-[#2c1a0e] placeholder-[#c8956c] focus:outline-none focus:ring-2 focus:ring-[#d4956a] focus:border-transparent transition-shadow"
+              onKeyDown={(e) => e.key === "Enter" && save()}
+            />
+            <div className="flex gap-2">
               <button
-                onClick={clear}
-                className="text-xs px-2 py-1 border rounded hover:bg-red-50 text-red-600"
+                onClick={save}
+                disabled={!key.trim()}
+                className="flex-1 text-xs px-3 py-2 bg-[#8b4513] text-[#fef9f0] rounded-lg font-medium disabled:opacity-40 hover:bg-[#6b3a1f] transition-colors"
               >
-                Clear
+                Save key
               </button>
-            )}
+              {saved && (
+                <button
+                  onClick={clear}
+                  className="text-xs px-3 py-2 border border-[#fca5a5] rounded-lg text-[#991b1b] hover:bg-[#fee2e2] transition-colors"
+                >
+                  Clear
+                </button>
+              )}
+            </div>
           </div>
-        </div>
+        </>
       )}
     </div>
   );

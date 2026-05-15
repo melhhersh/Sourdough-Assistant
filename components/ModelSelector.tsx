@@ -16,11 +16,13 @@ interface ModelSelectorProps {
 export function ModelSelector({ value, onChange }: ModelSelectorProps) {
   return (
     <div className="flex items-center gap-2">
-      <label className="text-xs text-gray-600 whitespace-nowrap">Model:</label>
+      <label className="text-[10px] font-semibold uppercase tracking-widest text-[#a0522d]">
+        Model
+      </label>
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="text-xs border rounded px-2 py-1 focus:outline-none focus:ring-1 focus:ring-blue-400"
+        className="text-xs bg-white border border-[#e8d5b7] rounded-lg px-2.5 py-1.5 text-[#2c1a0e] focus:outline-none focus:ring-2 focus:ring-[#d4956a] focus:border-transparent transition-shadow cursor-pointer"
       >
         {MODELS.map((m) => (
           <option key={m.id} value={m.id}>
